@@ -1,0 +1,41 @@
+{
+  "name": "gulp-workflow",
+  "version": "1.0.0",
+  "author": "Egor K <egor.korol@mail.ru>",
+  "homepage": "https://github.com/EgorKorol/gulp-workflow#readme",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EgorKorol/gulp-workflow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EgorKorol/gulp-workflow/issues"
+  },
+  "description": "Workflow for developing",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp dev",
+    "build": "gulp build",
+    "imagemin": "gulp imagemin"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.4.5",
+    "browser-sync": "^2.26.3",
+    "cssnano": "^4.1.8",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.4",
+    "node-sass": "^4.11.0",
+    "webpack-stream": "^5.2.1"
+  },
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
