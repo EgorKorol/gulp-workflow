@@ -87,7 +87,7 @@ const webpack = require('webpack-stream');
 
 gulp.task('js:dev', () =>
   gulp
-    .src('./src/**/*.js')
+    .src('./src/*.js')
     .pipe(
       webpack({
         entry: {
@@ -113,7 +113,7 @@ gulp.task('js:dev', () =>
 
 gulp.task('js:build', () =>
   gulp
-    .src('./src/**/*.js')
+    .src('./src/*.js')
     .pipe(
       webpack({
         entry: {
@@ -207,7 +207,7 @@ gulp.task('static:watch', () => {
 
 /** ****** FONTS ******* */
 
-gulp.task('copy:fonts', () => gulp.src('./src/fonts/*').pipe(gulp.dest('dist/fonts/')));
+gulp.task('copy:fonts', () => gulp.src('./src/fonts/**/*').pipe(gulp.dest('dist/fonts/')));
 
 /** ****** FONTS ******* */
 
