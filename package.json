@@ -23,12 +23,15 @@
     "precommit": "run-s format:fix eslint:fix"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
     "autoprefixer": "^9.4.5",
+    "babel-loader": "^8.0.5",
     "browser-sync": "^2.26.3",
     "cssnano": "^4.1.8",
     "del": "^3.0.0",
     "eslint": "^5.12.1",
-    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-import": "^2.15.0",
@@ -45,14 +48,5 @@
     "pretty-quick": "^1.10.0",
     "webpack-stream": "^5.2.1"
   },
-  "browserslist": [
-    "last 1 version",
-    "> 1%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "dependencies": {
-    "eslint-config-airbnb-base": "^13.1.0"
-  }
+  "dependencies": {}
 }

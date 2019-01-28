@@ -100,16 +100,20 @@ gulp.task('js:build', () =>
           filename: 'index.js',
         },
         mode: 'production',
-        // module: {
-        //   rules: [{
-        //     test: /\.(js)$/,
-        //     exclude: /(node_modules)/,
-        //     loader: 'babel-loader',
-        //     query: {
-        //       presets: ['@babel/env']
-        //     }
-        //   }]
-        // },
+        module: {
+          rules: [
+            {
+              test: /\.m?js$/,
+              exclude: /(node_modules|bower_components)/,
+              use: {
+                loader: 'babel-loader',
+                options: {
+                  presets: ['@babel/preset-env'],
+                },
+              },
+            },
+          ],
+        },
       })
     )
     .pipe(gulp.dest('dist/'))
@@ -202,6 +206,7 @@ gulp.task(
       'copy:html',
       'copy:images',
       'copy:fonts',
+      'copy:static',
       'browser-sync',
       'html:watch',
       'scss:watch',
@@ -214,5 +219,8 @@ gulp.task(
 
 gulp.task(
   'build',
-  gulp.series('clean', gulp.parallel('scss:build', 'js:build', 'copy:html', 'copy:images', 'copy:fonts'))
+  gulp.series(
+    'clean',
+    gulp.parallel('scss:build', 'js:build', 'copy:html', 'copy:images', 'copy:fonts', 'copy:static')
+  )
 );
