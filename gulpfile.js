@@ -17,11 +17,34 @@ gulp.task('browser-sync', () => {
 /** ****** BROWSER SYNC ******* */
 
 /** ****** HTML ******* */
+const nunjucksRender = require('gulp-nunjucks-render');
+const htmlmin = require('gulp-htmlmin');
 
-gulp.task('copy:html', () => gulp.src('./src/**/*.html').pipe(gulp.dest('dist/')));
+gulp.task('html:dev', () =>
+  gulp
+    .src('./src/*.html')
+    .pipe(
+      nunjucksRender({
+        path: ['src/templates/'],
+      })
+    )
+    .pipe(gulp.dest('dist/'))
+);
+
+gulp.task('html:build', () =>
+  gulp
+    .src('./src/*.html')
+    .pipe(
+      nunjucksRender({
+        path: ['src/templates/'],
+      })
+    )
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(gulp.dest('dist/'))
+);
 
 gulp.task('html:watch', () => {
-  gulp.watch('./src/**/*.html', gulp.series('copy:html'));
+  gulp.watch('./src/**/*.html', gulp.series('html:dev'));
 });
 
 /** ****** HTML ******* */
@@ -37,7 +60,7 @@ const cssnano = require('cssnano');
 
 gulp.task('scss:dev', () =>
   gulp
-    .src('./src/**/*.scss')
+    .src('./src/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.write())
@@ -203,7 +226,7 @@ gulp.task(
     gulp.parallel(
       'scss:dev',
       'js:dev',
-      'copy:html',
+      'html:dev',
       'copy:images',
       'copy:fonts',
       'copy:static',
@@ -221,6 +244,6 @@ gulp.task(
   'build',
   gulp.series(
     'clean',
-    gulp.parallel('scss:build', 'js:build', 'copy:html', 'copy:images', 'copy:fonts', 'copy:static')
+    gulp.parallel('scss:build', 'js:build', 'html:build', 'copy:images', 'copy:fonts', 'copy:static')
   )
 );
