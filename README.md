@@ -1,18 +1,58 @@
-# Workflow on Gulp
+# Workflow for development
 
-## Build Setup
-* ### clone this Repository
-##### $ https://github.com/egorov-by-egorov/Gulp.git
-* ### Move to Gulp folder
-##### $ cd Gulp
-* ### install dependencies
-##### $ npm install
+---
 
-* ### serve with reload at localhost:8080
-##### $ npm start
+## Setup
 
-* ### build for production with minification
-##### $ npm run build
+```bash
+# Clone or download this repository
+git clone https://github.com/EgorKorol/gulp-workflow.git
+# Install dependencies
+npm i
+```
 
-* ### Compress images
-##### $ npm run compress
+## Commands
+
+```bash
+# Start development
+npm start
+# Build for production with minification
+npm run build
+# Minify all your images
+npm run imagemin
+# Fix all eslint problems
+npm run eslint:fix
+# Make your code beautiful
+npm run prettier:fix
+```
+
+## Before commit
+
+Before your commit started husky script, which check and prettier your staged files
+
+## Dependencies
+
+- SCSS, autoprefixer, cssnano for styles
+- Webpack, babel, eslint, prettier for js
+- Nunjucks, htmlmin for work with HTML
+- Imagemin for minify images
+- Husky, pretty-quick, npm-run-all for precommit actions
+
+## How to use includes files
+
+##### Include html partials
+
+`{% include "part.html" %}`
+
+##### Include scss partials
+
+`@import './scss/part';`
+
+##### Include js partials
+
+`import './js/module';`
+
+## Info for multi page sites
+
+If you want make multi page site. You should created are `other.scss`, `other.html` and `other.js` files.
+P.s. doesn't forget write `other.js` file in `gulpfile.js` => `js:dev` and `js:build` => `entry`
