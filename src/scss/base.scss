@@ -1,24 +1,25 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box; // border: 1px solid red;
+  box-sizing: border-box;
 }
 
 body,
 html {
-  height: 100%;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  height: 100%;
   font-size: rem(16px);
 }
 
 body {
   -webkit-overflow-scrolling: touch !important;
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.42;
+
   -webkit-overscroll-behavior: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.42;
 }
 
 h1,
@@ -27,8 +28,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: normal;
   margin: 0;
+  font-weight: normal;
 }
 
 img,
@@ -45,7 +46,7 @@ ul {
 
 a,
 button {
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
 a {
@@ -63,9 +64,9 @@ address {
 }
 
 button {
+  outline: none;
   border: 0;
   cursor: pointer;
-  outline: none;
 }
 
 [disabled] {
@@ -76,18 +77,19 @@ input,
 textarea,
 select {
   font-family: inherit;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .visually-hidden {
   position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  margin: -1px;
+  padding: 0;
   width: 1px;
   height: 1px;
-  margin: -1px;
   border: 0;
-  padding: 0;
   white-space: nowrap;
+
   clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
 }
