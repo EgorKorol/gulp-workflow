@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Title</title>
-    <link rel="stylesheet" href="index.css" />
+    <meta name="description" content="Description around 150 symbols" />
+    <link rel="preload" href="index.css" as="style" />
   </head>
 
   <body>
     {% include "part.html" %}
-    <script src="index.js"></script>
+    <script rel="preload" src="index.js" as="script"></script>
   </body>
 </html>
