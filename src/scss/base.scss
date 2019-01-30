@@ -14,7 +14,7 @@ html {
 
 body {
   -webkit-overflow-scrolling: touch !important;
-  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.42;
 
   -webkit-overscroll-behavior: none;
@@ -55,12 +55,8 @@ a {
 }
 
 p {
-  margin: 0;
+  margin: 0 0 10px 0;
   padding: 0;
-}
-
-address {
-  font-style: normal;
 }
 
 button {
