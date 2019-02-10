@@ -30,26 +30,32 @@ npm run prettier:fix
 ```
 
 ## Before commit
+
 Before your commit started husky script, which check and prettier your staged files
 
 ## Dependencies
+
 - SCSS, autoprefixer, cssnano for styles
 - Webpack, babel, eslint, prettier for js
 - Nunjucks, htmlmin for work with HTML
-- Imagemin for minify images
+- Imagemin for minify images, critical-css for optimized render
 - Husky, pretty-quick, npm-run-all for precommit actions
 
 ## How to use includes files
 
 ##### Include html partials
+
 `{% include "part.html" %}`
 
 ##### Include scss partials
+
 `@import './scss/part';`
 
 ##### Include js partials
+
 `import './js/module';`
 
 ## Info for multi page sites
+
 If you want make multi page site. You should created are `other.scss`, `other.html` and `other.js` files.
 P.s. doesn't forget write `other.js` file in `gulpfile.js` => `js:dev` and `js:build` => `entry`
