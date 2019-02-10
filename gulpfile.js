@@ -40,7 +40,11 @@ gulp.task('html:build', () =>
         path: ['src/templates/'],
       })
     )
-    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(
+      htmlmin({
+        collapseWhitespace: true,
+      })
+    )
     .pipe(gulp.dest('dist/'))
 );
 
@@ -152,6 +156,8 @@ gulp.task('js:watch', () => {
 /** ****** IMAGES ******* */
 
 const imagemin = require('gulp-imagemin');
+const imageminPngquant = require('imagemin-pngquant');
+const imageminMozjpeg = require('imagemin-mozjpeg');
 
 gulp.task('copy:images', () => gulp.src('./src/images/**/*').pipe(gulp.dest('dist/images/')));
 
@@ -163,11 +169,13 @@ gulp.task('imagemin', () =>
         imagemin.gifsicle({
           interlaced: true,
         }),
-        imagemin.jpegtran({
+        imageminMozjpeg({
+          quality: 85,
           progressive: true,
         }),
-        imagemin.optipng({
-          optimizationLevel: 5,
+        imageminPngquant({
+          speed: 1,
+          quality: [0.8, 0.9],
         }),
         imagemin.svgo({
           plugins: [
@@ -187,7 +195,7 @@ gulp.task('imagemin', () =>
         }),
       ])
     )
-    .pipe(gulp.dest('dist/images'))
+    .pipe(gulp.dest('./src/images'))
 );
 
 gulp.task('images:watch', () => {
@@ -211,6 +219,41 @@ gulp.task('static:watch', () => {
 gulp.task('copy:fonts', () => gulp.src('./src/fonts/**/*').pipe(gulp.dest('dist/fonts/')));
 
 /** ****** FONTS ******* */
+
+/** ****** CRITICAL CSS ******* */
+
+const critical = require('critical');
+
+gulp.task('critical-css', (cb) => {
+  critical.generate(
+    {
+      inline: true,
+      base: 'dist/',
+      src: 'index.html',
+      dest: 'index.html',
+      minify: true,
+      width: 1300,
+      height: 700,
+    },
+    cb.bind(cb)
+  );
+});
+
+/** ****** CRITICAL CSS ******* */
+
+/** ****** SERVICE WORKER ******* */
+
+const workboxBuild = require('workbox-build');
+
+gulp.task('service-worker', () => {
+  return workboxBuild.generateSW({
+    globDirectory: 'dist',
+    globPatterns: ['**/*.{html,js,css,svg,png,jpg,jpeg}'],
+    swDest: 'dist/service-worker.js',
+  });
+});
+
+/** ****** SERVICE WORKER ******* */
 
 /** ****** CLEAN ******* */
 
@@ -245,6 +288,17 @@ gulp.task(
   'build',
   gulp.series(
     'clean',
-    gulp.parallel('scss:build', 'js:build', 'html:build', 'copy:images', 'copy:fonts', 'copy:static')
+    gulp.parallel('scss:build', 'js:build', 'html:build', 'copy:images', 'copy:fonts', 'copy:static'),
+    'service-worker'
+  )
+);
+
+gulp.task(
+  'build-landing',
+  gulp.series(
+    'clean',
+    gulp.parallel('scss:build', 'js:build', 'html:build', 'copy:images', 'copy:fonts', 'copy:static'),
+    'critical-css',
+    'service-worker'
   )
 );
