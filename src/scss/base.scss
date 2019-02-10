@@ -9,7 +9,7 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-size: rem(16px);
+  font-size: 16px;
 }
 
 body {
@@ -72,8 +72,19 @@ button {
 input,
 textarea,
 select {
+  outline: none;
+  font-size: inherit;
   font-family: inherit;
-  transition: 0.2s;
+  transition: all 0.3s ease-in-out;
+
+  &:focus {
+    border: 1px solid rgba(#4e69c2, 0.9);
+    box-shadow: 0 0 5px rgba(#4e69c2, 0.9);
+  }
+}
+
+section {
+  position: relative;
 }
 
 .visually-hidden {
