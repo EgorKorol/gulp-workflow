@@ -19,6 +19,9 @@ npm start
 # Build for production with minification
 npm run build
 
+# Build for production with minification and critical css for landing page
+npm run build-landing
+
 # Minify all your images
 npm run imagemin
 
