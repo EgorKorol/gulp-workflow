@@ -86,6 +86,23 @@ gulp.task('scss:watch', () => {
 
 /** ****** SCSS ******* */
 
+/** ****** PURGECSS ******* */
+
+const purgecss = require('gulp-purgecss');
+
+gulp.task('purgecss', () => {
+  return gulp
+    .src('dist/**/*.css')
+    .pipe(
+      purgecss({
+        content: ['dist/**/*.html'],
+      })
+    )
+    .pipe(gulp.dest('dist/'));
+});
+
+/** ****** PURGECSS ******* */
+
 /** ****** JS ******* */
 
 const webpack = require('webpack-stream');
@@ -248,7 +265,7 @@ const workboxBuild = require('workbox-build');
 gulp.task('service-worker', () => {
   return workboxBuild.generateSW({
     globDirectory: 'dist',
-    globPatterns: ['**/*.{html,js,css,svg,png,jpg,jpeg}'],
+    globPatterns: ['**/*.{html,js,css,svg,png,jpg,jpeg,woff2}'],
     swDest: 'dist/service-worker.js',
   });
 });
@@ -289,6 +306,7 @@ gulp.task(
   gulp.series(
     'clean',
     gulp.parallel('scss:build', 'js:build', 'html:build', 'copy:images', 'copy:fonts', 'copy:static'),
+    'purgecss',
     'service-worker'
   )
 );
@@ -298,6 +316,7 @@ gulp.task(
   gulp.series(
     'clean',
     gulp.parallel('scss:build', 'js:build', 'html:build', 'copy:images', 'copy:fonts', 'copy:static'),
+    'purgecss',
     'critical-css',
     'service-worker'
   )
